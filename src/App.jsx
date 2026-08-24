@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Dither from "@/components/Dither";
+import Threads from "@/components/Threads";
 import SplitText from "@/components/SplitText";
 import TextType from "@/components/TextType";
 import BorderGlow from "@/components/BorderGlow";
@@ -10,32 +10,30 @@ import { profile, links, socials } from "@/data/profile";
 export default function App() {
   const [copied, setCopied] = useState(false);
 
-  const handleCopyEmail = (e) => {
+  const handleCopy = (text, e) => {
     e.preventDefault();
-    navigator.clipboard.writeText("hello@example.com");
+    navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2200);
   };
 
   return (
-    <div className="relative min-h-screen bg-[#030712] selection:bg-cyan-500/30 selection:text-cyan-200">
-      {/* Ultra-lightweight Single-Pass WebGL Dither Background */}
+    <div className="relative min-h-screen bg-[#030712] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden font-sans">
+      
+      {/* React Bits: Single High-Performance Animated Threads Background */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <Dither
-          waveSpeed={0.035}
-          waveFrequency={2.4}
-          waveAmplitude={0.35}
-          waveColor={[0.1, 0.45, 0.75]}
-          colorNum={4}
-          pixelSize={2.5}
-          enableMouseInteraction={true}
-          mouseRadius={1.2}
-          className="opacity-75"
-        />
-        {/* Soft Vignette Overlay to enhance contrast and readability */}
-        <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_0%,rgba(3,7,18,0.72)_55%,#030712_100%]" />
-        {/* Subtle grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
+        <div className="w-full h-full opacity-65">
+          <Threads
+            color={[0.15, 0.72, 1.0]}
+            amplitude={1.3}
+            distance={0.35}
+            enableMouseInteraction={true}
+          />
+        </div>
+        {/* Soft Radial Vignette for Content Readability */}
+        <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_0%,rgba(3,7,18,0.7)_50%,#030712_95%]" />
+        {/* Modern Cyber Grid Accent */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
       </div>
 
       {/* Main Container */}
@@ -46,20 +44,20 @@ export default function App() {
           
           {/* Status Badge */}
           <AnimatedContent duration={0.5} distance={15} initialOpacity={0}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-medium text-emerald-400 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1 text-xs font-medium text-cyan-300 backdrop-blur-md mb-6 shadow-[0_0_25px_rgba(6,182,212,0.25)] font-mono">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
               </span>
               {profile.status}
             </div>
           </AnimatedContent>
 
-          {/* Avatar with Neon Glow */}
-          <AnimatedContent duration={0.7} initialOpacity={0} scale={0.9} delay={0.1}>
+          {/* Avatar with Neon Ring */}
+          <AnimatedContent duration={0.7} initialOpacity={0} scale={0.9} delay={0.08}>
             <div className="relative group mb-5">
-              <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-fuchsia-500 opacity-80 blur-md group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow" />
-              <div className="relative h-28 w-28 rounded-full border-2 border-white/20 p-1 bg-[#070b14] backdrop-blur-xl shadow-2xl">
+              <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-cyan-500 via-indigo-500 to-fuchsia-500 opacity-75 blur-lg group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow" />
+              <div className="relative h-28 w-28 rounded-full border-2 border-white/25 p-1 bg-[#060a14] backdrop-blur-2xl shadow-2xl overflow-hidden">
                 <img
                   src={profile.avatar}
                   alt={profile.name}
@@ -70,8 +68,8 @@ export default function App() {
           </AnimatedContent>
 
           {/* Role label */}
-          <AnimatedContent duration={0.5} delay={0.15} distance={10}>
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-cyan-400/90 mb-1 font-mono">
+          <AnimatedContent duration={0.5} delay={0.12} distance={10}>
+            <p className="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-cyan-400/90 mb-1.5 font-mono">
               {profile.role}
             </p>
           </AnimatedContent>
@@ -84,30 +82,51 @@ export default function App() {
               delay={40}
               duration={0.8}
               splitType="chars"
-              className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl drop-shadow-[0_0_30px_rgba(34,211,238,0.25)]"
+              className="text-4xl font-black tracking-tight text-white sm:text-6xl drop-shadow-[0_0_40px_rgba(56,189,248,0.35)]"
               textAlign="center"
             />
           </div>
+
+          {/* Quote */}
+          <p className="mt-2 text-xs italic text-zinc-400 font-mono">
+            {profile.quote}
+          </p>
 
           {/* Dynamic Typewriter Bio */}
           <div className="mt-3 min-h-[30px] flex items-center justify-center max-w-md px-2">
             <TextType
               text={profile.bio}
-              typingSpeed={40}
+              typingSpeed={38}
               pauseDuration={2200}
-              deletingSpeed={20}
+              deletingSpeed={18}
               showCursor={true}
               cursorCharacter="▋"
               cursorClassName="text-cyan-400"
-              className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed"
+              className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed text-center"
             />
           </div>
 
-          {/* Location & Handle */}
-          <div className="mt-3 flex items-center gap-3 text-xs text-zinc-400 font-mono">
+          {/* Location & Handle & Organizations */}
+          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs text-zinc-400 font-mono">
             <span>{profile.location}</span>
             <span className="text-zinc-600">•</span>
-            <span className="text-cyan-400/90">{profile.handle}</span>
+            <span className="text-cyan-400 font-medium">{profile.handle}</span>
+            <span className="text-zinc-600">•</span>
+            <div className="flex items-center gap-1.5">
+              {profile.orgs.map((org) => (
+                <a
+                  key={org.name}
+                  href={`https://github.com/${org.name}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 hover:text-cyan-300 transition-colors"
+                  title={`@${org.name}`}
+                >
+                  <img src={org.avatar} alt={org.name} className="w-3.5 h-3.5 rounded-full" />
+                  <span>@{org.name}</span>
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Tech stack chips */}
@@ -115,7 +134,7 @@ export default function App() {
             {profile.skills.map((skill) => (
               <span
                 key={skill}
-                className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[11px] font-mono text-zinc-300 backdrop-blur-sm transition-all duration-200 hover:border-cyan-500/40 hover:text-cyan-300 hover:bg-cyan-500/5"
+                className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-0.5 text-[11px] font-mono text-zinc-300 backdrop-blur-sm transition-all duration-200 hover:border-cyan-500/50 hover:text-cyan-300 hover:bg-cyan-500/10"
               >
                 {skill}
               </span>
@@ -126,11 +145,12 @@ export default function App() {
         {/* Links & Projects Section */}
         <section aria-label="Links and Projects" className="mt-10 flex flex-col gap-3.5">
           <div className="flex items-center justify-between px-1 mb-1">
-            <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">
-              Featured Links & Work
+            <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              Destinations & Work
             </span>
             <span className="text-[11px] font-mono text-zinc-400">
-              {links.length} destinations
+              {links.length} links
             </span>
           </div>
 
@@ -217,19 +237,19 @@ export default function App() {
           ))}
         </section>
 
-        {/* Copy Email Button */}
+        {/* Quick Copy Command / GitHub profile link */}
         <div className="mt-6">
           <button
-            onClick={handleCopyEmail}
+            onClick={(e) => handleCopy("https://github.com/qriqs", e)}
             className="w-full flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] p-3.5 text-xs text-zinc-400 backdrop-blur-md transition-all duration-200 hover:border-cyan-500/30 group cursor-pointer"
           >
             <span className="flex items-center gap-2">
-              <Icon name="mail" className="h-4 w-4 text-cyan-400" />
-              <span className="font-mono text-zinc-300">hello@example.com</span>
+              <Icon name="terminal" className="h-4 w-4 text-cyan-400" />
+              <span className="font-mono text-zinc-300">github.com/qriqs</span>
             </span>
             <span className="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 group-hover:text-cyan-300">
               <Icon name={copied ? "check" : "copy"} className="h-3.5 w-3.5" />
-              {copied ? "Copied to clipboard!" : "Copy email"}
+              {copied ? "Copied profile URL!" : "Copy URL"}
             </span>
           </button>
         </div>
@@ -256,8 +276,8 @@ export default function App() {
             <p className="text-xs text-zinc-400 font-mono">
               Designed & Engineered with <span className="text-cyan-400 font-semibold">React Bits</span>
             </p>
-            <p className="text-[11px] text-zinc-400">
-              © {new Date().getFullYear()} {profile.name} • All rights reserved
+            <p className="text-[11px] text-zinc-400 font-mono">
+              © {new Date().getFullYear()} {profile.name} (@{profile.username})
             </p>
           </div>
         </footer>
