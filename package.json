@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@react-three/fiber": "^9.3.0",
+    "@react-three/postprocessing": "^3.0.4",
     "gsap": "^3.13.0",
     "motion": "^12.23.12",
     "ogl": "^1.0.11",
+    "postprocessing": "^6.36.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.13",
