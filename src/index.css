@@ -45,8 +45,7 @@ body { background: #0a0a09; }
 .page-wrap { max-width: 1240px; }
 .topbar { border-color: #252525; }
 .hero { position: relative; }
-.hero::before { color: rgba(225, 222, 211, .045); content: "A N G E L   /   6 5 6 8 9 7 6 2"; font: 600 clamp(36px, 7vw, 100px)/1 "Cormorant Garamond"; left: 3%; letter-spacing: .12em; pointer-events: none; position: absolute; top: 18%; transform: rotate(-8deg); white-space: nowrap; }
-.hero::after { color: rgba(225, 222, 211, .22); content: "✦  ꧁  𓆩  𓆪  ꧂  ✦"; font: 20px "Cormorant Garamond"; left: 5%; letter-spacing: .5em; pointer-events: none; position: absolute; top: 68%; }
+.hero::before { color: rgba(225, 222, 211, .045); content: "A N G E L   /   6 6 6"; font: 600 clamp(36px, 7vw, 100px)/1 "Cormorant Garamond"; left: 3%; letter-spacing: .12em; pointer-events: none; position: absolute; top: 18%; transform: rotate(-8deg); white-space: nowrap; }
 .hero-copy, .profile-card { position: relative; z-index: 1; }
 .eyebrow::before { content: "𖤐 "; }
 .hero h1, h2 { font-family: "Cormorant Garamond", serif; font-weight: 600; letter-spacing: -.055em; }
