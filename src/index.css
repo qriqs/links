@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 :root { font-family: "DM Sans", sans-serif; color: #e9e7e2; background: #080808; font-synthesis: none; }
@@ -35,3 +35,37 @@ body { background: #0a0a09; }
 .profile-card { background: #11110f; border-color: #44413a; box-shadow: 18px 18px 0 #1b1916, 0 30px 80px #000; }.profile-topline { color: #77736a; }.portrait { filter: grayscale(1) sepia(.12) contrast(1.2); }.portrait-orbit { border-color: #bbb5a9; }.orbit-b { border-color: #766d62; }.profile-details { border-color: #34312c; }.profile-details h2, .stat strong { color: #dfdcd3; }.profile-details p, .stat span { color: #858077; }.profile-mark { color: #aaa092; }
 .section-heading h2, .connect-row h2 { color: #e2dfd6; }.filter { color: #77736a; }.filter.active { border-color: #aaa092; color: #e2dfd6; }.link-list, .link-card, .connect-row, footer { border-color: #38352f; }.link-card:hover { background: #161512; }.link-card.featured { background: #141310; }.link-index, .tag-row span, .link-badge { color: #68645c; }.link-icon { background: #24221e; border-color: #48443b; color: #cbc6bb; }.link-title { color: #e1ded4; }.link-arrow { color: #aaa092; }.link-description { color: #858077; }
 .copy-button { border-color: #555047; color: #aaa69c; }.copy-button svg { color: #aaa092; }.socials a { color: #858077; }.socials a:hover { color: #e2dfd6; } footer { color: #68645c; }
+
+/* Gothic collage layer: severe contrast, faded type and restrained ornament. */
+.site-shell { background: #060606; }
+.site-shell::after { border: 1px solid rgba(224, 220, 209, .12); content: ""; inset: 16px; pointer-events: none; position: absolute; }
+.ambient { opacity: .09; }
+.ambient-one { background: #fff; filter: blur(120px); }
+.ambient-two { background: #82786c; filter: blur(120px); }
+.page-wrap { max-width: 1240px; }
+.topbar { border-color: #252525; }
+.hero { position: relative; }
+.hero::before { color: rgba(225, 222, 211, .045); content: "A N G E L   /   6 5 6 8 9 7 6 2"; font: 600 clamp(36px, 7vw, 100px)/1 "Cormorant Garamond"; left: 3%; letter-spacing: .12em; pointer-events: none; position: absolute; top: 18%; transform: rotate(-8deg); white-space: nowrap; }
+.hero::after { color: rgba(225, 222, 211, .22); content: "✦  ꧁  𓆩  𓆪  ꧂  ✦"; font: 20px "Cormorant Garamond"; left: 5%; letter-spacing: .5em; pointer-events: none; position: absolute; top: 68%; }
+.hero-copy, .profile-card { position: relative; z-index: 1; }
+.eyebrow::before { content: "𖤐 "; }
+.hero h1, h2 { font-family: "Cormorant Garamond", serif; font-weight: 600; letter-spacing: -.055em; }
+.hero h1 { font-size: clamp(68px, 8vw, 116px); line-height: .78; text-transform: uppercase; }
+.hero h1 em, h2 em { color: #f0eee7; font-style: italic; }
+.intro { color: #8c8a84; max-width: 420px; }
+.primary-button { background: #eceae3; border-radius: 1px; box-shadow: 5px 5px 0 #34312b; color: #090909; font-family: "DM Mono"; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+.primary-button:hover { background: #fff; }
+.text-button { border-color: #9e9a91; font-family: "DM Mono"; font-size: 11px; text-transform: uppercase; }
+.profile-card { background: #0b0b0b; border-color: #5b574f; box-shadow: 14px 14px 0 #25231f, 0 30px 80px #000; }
+.profile-card::before, .profile-card::after { color: #777168; font: 22px "Cormorant Garamond"; position: absolute; z-index: 2; }.profile-card::before { content: "❧"; left: 9px; top: 7px; transform: rotate(180deg); }.profile-card::after { bottom: 4px; content: "❧"; right: 9px; }
+.portrait-wrap { border: 1px solid #37342f; }
+.portrait-orbit { opacity: .28; }
+.profile-details h2, .section-heading h2, .connect-row h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(43px, 5vw, 72px); font-weight: 600; letter-spacing: -.055em; text-transform: uppercase; }
+.profile-details h2 { font-size: 28px; text-transform: none; }
+.section-heading h2, .connect-row h2 { line-height: .78; }
+.filter, .link-badge, footer, .eyebrow { letter-spacing: .16em; }
+.link-card { min-height: 112px; }
+.link-card.featured { background: #e6e3db; color: #111; box-shadow: inset 7px 0 #111; }.link-card.featured .link-title { color: #111; }.link-card.featured .link-description { color: #5d5a54; }.link-card.featured .link-icon { background: #111; color: #e6e3db; }.link-card.featured .tag-row span, .link-card.featured .link-index, .link-card.featured .link-badge { color: #67635b; }
+.link-title { font-family: "Cormorant Garamond", serif; font-size: 24px; font-weight: 600; }.link-description { max-width: 650px; }
+.connect-row { position: relative; }.connect-row::after { color: rgba(230, 227, 218, .16); content: "𓆩  𓆪"; font: 76px "Cormorant Garamond"; position: absolute; right: 43%; top: 35%; }
+@media (max-width: 760px) { .site-shell::after { inset: 8px; }.hero::before { left: 0; top: 14%; white-space: normal; width: 90%; }.hero::after { top: 57%; }.hero h1 { font-size: clamp(66px, 18vw, 100px); }.link-title { font-size: 21px; }.connect-row::after { right: 10%; top: 48%; } }
