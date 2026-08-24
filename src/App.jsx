@@ -20,7 +20,7 @@ export default function App() {
       <div className="ambient ambient-one" /><div className="ambient ambient-two" />
       <main className="page-wrap">
         <nav className="topbar" aria-label="Primary navigation">
-          <a className="wordmark" href="#top" aria-label="Go to top"><span className="seal-wing seal-left">𓆩</span><span className="seal-core">CA</span><span className="seal-wing seal-right">𓆪</span></a>
+          <a className="wordmark" href="#top" aria-label="Go to top">CA<span>.</span></a>
           <div className="topbar-meta"><span className="availability"><i /> Available for select projects</span><a className="email-link" href="mailto:hello@qriqs.dev">Let&apos;s talk <span>↗</span></a></div>
         </nav>
 
