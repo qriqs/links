@@ -45,6 +45,7 @@ export const links = [
     description: "Partner development launchpad building high-performance web systems & digital platforms.",
     url: "https://orbitly.lat/",
     icon: "globe",
+    event: "link_orbitly_launchpad",
     badge: "Official Website",
     glowColor: "190 95 65", // Cyan neon
     colors: ["#00f0ff", "#3b82f6", "#8b5cf6"],
@@ -56,6 +57,7 @@ export const links = [
     description: "Main app platform for OpenHub. Engineered with Kotlin for fast cross-device scale.",
     url: "https://github.com/openhublabs/openhub-app",
     icon: "code",
+    event: "link_openhub_repo",
     badge: "Featured Repo",
     glowColor: "280 85 70", // Purple neon
     colors: ["#a855f7", "#ec4899", "#3b82f6"],
@@ -67,6 +69,7 @@ export const links = [
     description: "Main web platform for Sin Floros built with modern TypeScript & high-grade architecture.",
     url: "https://github.com/sinfloros/sinfloros-app",
     icon: "sparkles",
+    event: "link_sinfloros_repo",
     badge: "Featured Repo",
     glowColor: "210 90 65", // Electric blue
     colors: ["#38bdf8", "#818cf8", "#c084fc"],
@@ -78,6 +81,7 @@ export const links = [
     description: "Stylized digital English study binder with a physical notebook aesthetic in Astro + Tailwind.",
     url: "https://github.com/qriqs/english-keynotes",
     icon: "terminal",
+    event: "link_english_keynotes_repo",
     badge: "Astro + MDX",
     glowColor: "45 95 65", // Gold / Amber
     colors: ["#fbbf24", "#f59e0b", "#d97706"],
@@ -89,6 +93,7 @@ export const links = [
     description: "14 repositories, achievements, dotfiles, scripts, cloud configs, and open source work.",
     url: "https://github.com/qriqs",
     icon: "github",
+    event: "link_github_profile",
     badge: "GitHub Pro",
     glowColor: "220 90 65", // Cyber Blue
     colors: ["#38bdf8", "#6366f1", "#a855f7"],
@@ -100,6 +105,7 @@ export const links = [
     description: "Personal lifestyle, creative moments, tech setups, and daily updates.",
     url: "https://www.instagram.com/whycrz",
     icon: "instagram",
+    event: "link_instagram_profile",
     glowColor: "330 85 65", // Pink / Fuchsia
     colors: ["#f43f5e", "#d946ef", "#8b5cf6"],
     tags: ["@whycrz", "Social", "Moments"],
@@ -110,6 +116,7 @@ export const links = [
     description: "Thoughts on cloud engineering, infrastructure automation, Linux, and tech trends.",
     url: "https://x.com/cristozsh",
     icon: "x",
+    event: "link_x_twitter_profile",
     glowColor: "200 90 60", // X / Sky blue
     colors: ["#0ea5e9", "#38bdf8", "#818cf8"],
     tags: ["@cristozsh", "DevOps Tweets", "Tech"],
@@ -117,8 +124,8 @@ export const links = [
 ];
 
 export const socials = [
-  { label: "GitHub", url: "https://github.com/qriqs", icon: "github" },
-  { label: "Orbitly", url: "https://orbitly.lat/", icon: "globe" },
-  { label: "Instagram", url: "https://www.instagram.com/whycrz", icon: "instagram" },
-  { label: "X / Twitter", url: "https://x.com/cristozsh", icon: "x" },
+  { label: "GitHub", url: "https://github.com/qriqs", icon: "github", event: "social_footer_github" },
+  { label: "Orbitly", url: "https://orbitly.lat/", icon: "globe", event: "social_footer_orbitly" },
+  { label: "Instagram", url: "https://www.instagram.com/whycrz", icon: "instagram", event: "social_footer_instagram" },
+  { label: "X / Twitter", url: "https://x.com/cristozsh", icon: "x", event: "social_footer_x_twitter" },
 ];

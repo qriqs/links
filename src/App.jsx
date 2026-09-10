@@ -6,34 +6,14 @@ import { trackEvent } from "@/utils/analytics";
 const filters = ["All links", "Work", "Code", "Social"];
 const getType = (link) => ["instagram", "twitter"].includes(link.id) ? "Social" : link.id === "orbitly" ? "Work" : "Code";
 
-const getLinkAnalyticsAttrs = (link) => {
-  if (link.id === "github") {
-    return {
-      "data-umami-event": "github_click",
-      "data-umami-event-url": link.url,
-      "data-umami-event-title": link.title,
-    };
-  }
-  if (["twitter", "instagram", "linkedin", "telegram"].includes(link.id)) {
-    return {
-      "data-umami-event": "social_click",
-      "data-umami-event-network": link.id === "twitter" ? "x_twitter" : link.id,
-      "data-umami-event-url": link.url,
-      "data-umami-event-title": link.title,
-    };
-  }
-  if (link.id === "resume") {
-    return {
-      "data-umami-event": "resume_download",
-      "data-umami-event-url": link.url,
-      "data-umami-event-title": link.title,
-    };
-  }
+const getLinkAnalyticsAttrs = (link, type) => {
+  const eventName = link.event || `link_${link.id.replace(/-/g, "_")}`;
   return {
-    "data-umami-event": "project_click",
-    "data-umami-event-project": link.id,
+    "data-umami-event": eventName,
+    "data-umami-event-id": link.id,
     "data-umami-event-title": link.title,
     "data-umami-event-url": link.url,
+    "data-umami-event-category": type.toLowerCase(),
   };
 };
 
@@ -46,7 +26,7 @@ export default function App() {
     try {
       await navigator.clipboard.writeText("https://github.com/qriqs");
       setCopied(true);
-      trackEvent("copy_profile_url", { target: "https://github.com/qriqs" });
+      trackEvent("copy_github_profile_url", { target: "https://github.com/qriqs" });
       window.setTimeout(() => setCopied(false), 2200);
     } catch {
       // Graceful fallback for clipboard permissions
@@ -55,7 +35,8 @@ export default function App() {
 
   const handleFilterChange = (item) => {
     setFilter(item);
-    trackEvent("filter_change", { category: item });
+    const filterSlug = item.toLowerCase().replace(/\s+/g, "_");
+    trackEvent(`filter_tab_${filterSlug}`, { category: item });
   };
 
   return (
@@ -63,14 +44,21 @@ export default function App() {
       <div className="ambient ambient-one" /><div className="ambient ambient-two" />
       <main className="page-wrap">
         <nav className="topbar" aria-label="Primary navigation">
-          <a className="wordmark" href="#top" aria-label="Go to top" data-umami-event="nav_wordmark_click">CA<span>.</span></a>
+          <a
+            className="wordmark"
+            href="#top"
+            aria-label="Go to top"
+            data-umami-event="nav_wordmark_scroll_top"
+          >
+            CA<span>.</span>
+          </a>
           <div className="topbar-meta">
             <span className="availability"><i /> Available for select projects</span>
             <a
               className="email-link"
               href="mailto:hello@qriqs.dev"
-              data-umami-event="email_click"
-              data-umami-event-location="topbar"
+              data-umami-event="contact_email_topbar"
+              data-umami-event-email="hello@qriqs.dev"
             >
               Let&apos;s talk <span>↗</span>
             </a>
@@ -88,16 +76,16 @@ export default function App() {
                 href="https://github.com/qriqs"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-umami-event="github_click"
-                data-umami-event-location="hero"
+                data-umami-event="hero_github_explore_click"
+                data-umami-event-url="https://github.com/qriqs"
               >
                 Explore my work <span>↗</span>
               </a>
               <a
                 className="text-button"
                 href="mailto:hello@qriqs.dev"
-                data-umami-event="email_click"
-                data-umami-event-location="hero"
+                data-umami-event="contact_email_hero"
+                data-umami-event-email="hello@qriqs.dev"
               >
                 Get in touch
               </a>
@@ -115,39 +103,45 @@ export default function App() {
           <div className="section-heading">
             <div><p className="eyebrow">02 / Selected links</p><h2>A few places<br /><em>you can find me.</em></h2></div>
             <div className="filter-list" role="tablist" aria-label="Filter links">
-              {filters.map((item) => (
-                <button
-                  className={filter === item ? "filter active" : "filter"}
-                  onClick={() => handleFilterChange(item)}
-                  key={item}
-                  data-umami-event="filter_click"
-                  data-umami-event-category={item}
-                >
-                  {item}
-                </button>
-              ))}
+              {filters.map((item) => {
+                const filterSlug = item.toLowerCase().replace(/\s+/g, "_");
+                return (
+                  <button
+                    className={filter === item ? "filter active" : "filter"}
+                    onClick={() => handleFilterChange(item)}
+                    key={item}
+                    data-umami-event={`filter_tab_${filterSlug}`}
+                    data-umami-event-filter={item}
+                  >
+                    {item}
+                  </button>
+                );
+              })}
             </div>
           </div>
           <div className="link-list">
-            {visibleLinks.map((link, index) => (
-              <a
-                className={index === 0 && filter === "All links" ? "link-card featured" : "link-card"}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={link.id}
-                {...getLinkAnalyticsAttrs(link)}
-              >
-                <span className="link-index">0{index + 1}</span>
-                <span className="link-icon"><Icon name={link.icon} /></span>
-                <span className="link-content">
-                  <span className="link-title">{link.title} <span className="link-arrow">↗</span></span>
-                  <span className="link-description">{link.description}</span>
-                  <span className="tag-row">{link.tags?.map((tag) => <span key={tag}>{tag}</span>)}</span>
-                </span>
-                {link.badge && <span className="link-badge">{link.badge}</span>}
-              </a>
-            ))}
+            {visibleLinks.map((link, index) => {
+              const linkType = getType(link);
+              return (
+                <a
+                  className={index === 0 && filter === "All links" ? "link-card featured" : "link-card"}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={link.id}
+                  {...getLinkAnalyticsAttrs(link, linkType)}
+                >
+                  <span className="link-index">0{index + 1}</span>
+                  <span className="link-icon"><Icon name={link.icon} /></span>
+                  <span className="link-content">
+                    <span className="link-title">{link.title} <span className="link-arrow">↗</span></span>
+                    <span className="link-description">{link.description}</span>
+                    <span className="tag-row">{link.tags?.map((tag) => <span key={tag}>{tag}</span>)}</span>
+                  </span>
+                  {link.badge && <span className="link-badge">{link.badge}</span>}
+                </a>
+              );
+            })}
           </div>
         </section>
 
@@ -157,7 +151,7 @@ export default function App() {
             <button
               onClick={handleCopy}
               className="copy-button"
-              data-umami-event="copy_profile_url"
+              data-umami-event="copy_github_profile_url"
               data-umami-event-target="https://github.com/qriqs"
             >
               <Icon name={copied ? "check" : "copy"} />
@@ -165,8 +159,7 @@ export default function App() {
             </button>
             <div className="socials">
               {socials.map((social) => {
-                const isGithub = social.label.toLowerCase() === "github";
-                const eventName = isGithub ? "github_click" : "social_click";
+                const defaultEvent = `social_footer_${social.label.toLowerCase().replace(/[^a-z0-9]+/g, "_")}`;
                 return (
                   <a
                     href={social.url}
@@ -174,8 +167,8 @@ export default function App() {
                     rel="noopener noreferrer"
                     aria-label={social.label}
                     key={social.label}
-                    data-umami-event={eventName}
-                    data-umami-event-network={social.label.toLowerCase()}
+                    data-umami-event={social.event || defaultEvent}
+                    data-umami-event-network={social.label}
                     data-umami-event-url={social.url}
                   >
                     <Icon name={social.icon} />
